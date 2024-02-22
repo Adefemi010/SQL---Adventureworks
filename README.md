@@ -13,12 +13,12 @@ Retrieve information about the products with colour values except null, red, sil
     Color,
     StandardCost AS Price,
     ListPrice
-FROM 
+    FROM 
     [Production].[Product]
-WHERE 
+    WHERE 
     Color IS NULL OR Color NOT IN ('Red', 'Silver/Black', 'White') 
     AND ListPrice BETWEEN 75 AND 750
-ORDER BY 
+    ORDER BY 
     ListPrice DESC;
 
 ## Question 2
