@@ -71,11 +71,11 @@ Return all product subcategories that take an average of 3 days or longer to man
 
 ## SQL Query 5
 
-SELECT DISTINCT PS.Name, PP.DaysToManufacture, PS.ProductSubcategoryID
-FROM [Production].[Product] AS PP
-INNER JOIN [Production].[ProductSubcategory] AS PS
-ON PP.ProductSubcategoryID = PS.ProductSubcategoryID
-WHERE PP.DaysToManufacture >= 3
+    SELECT DISTINCT PS.Name, PP.DaysToManufacture, PS.ProductSubcategoryID
+    FROM [Production].[Product] AS PP
+    INNER JOIN [Production].[ProductSubcategory] AS PS
+    ON PP.ProductSubcategoryID = PS.ProductSubcategoryID
+    WHERE PP.DaysToManufacture >= 3
 
 
 ## QUESTION 6
@@ -84,16 +84,16 @@ Create a list of product segmentation by defining criteria that places each item
 
 ## SQL Query 6
 
-SELECT NAME, Color, ListPrice,
-CASE
-WHEN ListPrice < 200 THEN 'low value'
-WHEN ListPrice BETWEEN 201  AND 750 THEN 'mid value'
-WHEN ListPrice BETWEEN 750  AND 1250 THEN 'mid to High value'
-ELSE 'higher value'
-END AS Product_Segmentation
-FROM [Production].[Product]
-WHERE Color IN ('black', 'silver', 'red')
-
+    SELECT NAME, Color, ListPrice,
+    CASE
+    WHEN ListPrice < 200 THEN 'low value'
+    WHEN ListPrice BETWEEN 201  AND 750 THEN 'mid value'
+    WHEN ListPrice BETWEEN 750  AND 1250 THEN 'mid to High value'
+    ELSE 'higher value'
+    END AS Product_Segmentation
+    FROM [Production].[Product]
+    WHERE Color IN ('black', 'silver', 'red')
+    
 
 ## Question 7
 
@@ -101,9 +101,9 @@ How many Distinct Job title is present in the Employee table? UESTION 7
 
 ## SQL Query 7
 
-SELECT
-COUNT (DISTINCT JobTitle) AS NumberOfJobtitle
-FROM [HumanResources].[Employee]
+    SELECT
+    COUNT (DISTINCT JobTitle) AS NumberOfJobtitle
+    FROM [HumanResources].[Employee]
 
 ## Question 8
 
@@ -111,10 +111,10 @@ Use employee table and calculate the ages of each employee at the time of hiring
 
 ## SQL Query 8
 
-SELECT BusinessEntityID, JobTitle, 
-DATEDIFF(YEAR, BirthDate, HireDate) 
-AS AgeAtHiring 
-FROM [HumanResources].[Employee]
+    SELECT BusinessEntityID, JobTitle, 
+    DATEDIFF(YEAR, BirthDate, HireDate) 
+    AS AgeAtHiring 
+    FROM [HumanResources].[Employee]
 
 ## Question 9
 
@@ -122,22 +122,22 @@ How many employees will be due a long service award in the next 5 years, if long
 
 ## SQL Query 9
 
-SELECT 
-COUNT (*) AS LongServiceAwardsDue
-FROM [HumanResources].[Employee]
-WHERE
-DATEDIFF(YEAR, HireDate, DATEADD(YEAR, 5, GETDATE())) >= 20
-
+    SELECT 
+    COUNT (*) AS LongServiceAwardsDue
+    FROM [HumanResources].[Employee]
+    WHERE
+    DATEDIFF(YEAR, HireDate, DATEADD(YEAR, 5, GETDATE())) >= 20
+    
 ## Question 10
 
 How many more years does each employee have to work before reaching sentiment, if sentiment age is 65? 
 
 ## SQL Query 10
 
-SELECT 
-BusinessEntityID, JobTitle, 
-65 - DATEDIFF(YEAR, BirthDate, GETDATE()) AS YearsToRetirement
-FROM [HumanResources].[Employee]
+    SELECT 
+    BusinessEntityID, JobTitle, 
+    65 - DATEDIFF(YEAR, BirthDate, GETDATE()) AS YearsToRetirement
+    FROM [HumanResources].[Employee]
 
 ## Question 11
 
@@ -148,24 +148,24 @@ each item, also calculate commission as 37.5% of newly computed list price
 
 ## SQL Query 11
 
-select ListPrice, color,
-CASE
-    WHEN Color = 'white' THEN ListPrice * 1.08
-    WHEN Color = 'yellow' THEN Listprice * 0.925
-    WHEN Color = 'black' THEN Listprice * 1.172
-    WHEN Color IN ('multi', 'silver', 'silver/black', 'blue') THEN SQRT(Listprice) * 2
-    ELSE ListPrice
-END as NewPrice,
-CASE
-WHEN Color = 'white' THEN ListPrice * 1.08 * 0.375
-    WHEN Color = 'yellow' THEN Listprice * 0.925 * 0.375
-    WHEN Color = 'black' THEN Listprice * 1.172 * 0.375
-    WHEN Color IN ('multi', 'silver', 'silver/black', 'blue') THEN SQRT(Listprice) * 2 * 0.375
-    ELSE ListPrice * 0.375
-END as Commission
-from [Production].[Product]
-
-
+    select ListPrice, color,
+    CASE
+        WHEN Color = 'white' THEN ListPrice * 1.08
+        WHEN Color = 'yellow' THEN Listprice * 0.925
+        WHEN Color = 'black' THEN Listprice * 1.172
+        WHEN Color IN ('multi', 'silver', 'silver/black', 'blue') THEN SQRT(Listprice) * 2
+        ELSE ListPrice
+    END as NewPrice,
+    CASE
+    WHEN Color = 'white' THEN ListPrice * 1.08 * 0.375
+        WHEN Color = 'yellow' THEN Listprice * 0.925 * 0.375
+        WHEN Color = 'black' THEN Listprice * 1.172 * 0.375
+        WHEN Color IN ('multi', 'silver', 'silver/black', 'blue') THEN SQRT(Listprice) * 2 * 0.375
+        ELSE ListPrice * 0.375
+    END as Commission
+    from [Production].[Product]
+    
+    
 
 ## Question 12
 
@@ -173,14 +173,14 @@ Print the information about all the Sales.Person and their sales quota. For ever
 
 ## SQL Query 12
 
-SELECT SP.BusinessEntityID, PP.FirstName, PP.LastName, HRE.HireDate, HRE.SickLeaveHours, ST.Name AS Region
-FROM [Sales].[SalesPerson]  SP
-LEFT JOIN [Person].[Person] AS PP
-ON SP.BusinessEntityID = PP.BusinessEntityID
-LEFT JOIN [HumanResources].[Employee] AS HRE
-ON SP.BusinessEntityID = HRE.BusinessEntityID
-LEFT JOIN Sales.SalesTerritory AS ST
-ON SP.TerritoryID = ST.TerritoryID;
+    SELECT SP.BusinessEntityID, PP.FirstName, PP.LastName, HRE.HireDate, HRE.SickLeaveHours, ST.Name AS Region
+    FROM [Sales].[SalesPerson]  SP
+    LEFT JOIN [Person].[Person] AS PP
+    ON SP.BusinessEntityID = PP.BusinessEntityID
+    LEFT JOIN [HumanResources].[Employee] AS HRE
+    ON SP.BusinessEntityID = HRE.BusinessEntityID
+    LEFT JOIN Sales.SalesTerritory AS ST
+    ON SP.TerritoryID = ST.TerritoryID;
 
 ## Question 13
 
@@ -196,31 +196,31 @@ Using adventure works, write a query to extract the following information.
 
 ## SQL Query 13
 
-SELECT PP.Name as ProductName,
-PC.Name AS CategoryName,
-PS.Name AS SubCategoryName,
-PPP.FirstName + ' ' + PPP.LastName AS SalesPersonName,       
-SOH.TotalDue AS Revenue,
-MONTH(SOH.OrderDate) AS MonthofTransaction, 
-DATEPART(QUARTER, SOH.OrderDate) AS QuarterOfTransaction,
-ST.Name AS Region
-FROM [Production].[Product] AS PP
-INNER JOIN  [Production].[ProductSubcategory] AS PS
-ON PP.ProductSubcategoryID = PS.ProductSubcategoryID
-INNER JOIN [Production].[ProductCategory] AS PC 
-ON PS.ProductCategoryID = PC.ProductCategoryID
-INNER JOIN Sales.SalesOrderDetail AS SOD
-ON PP.ProductID = SOD.ProductID
-INNER JOIN Sales.SalesOrderHeader AS SOH
-ON SOD.SalesOrderID = SOH.SalesOrderID
-INNER JOIN Sales.SalesPerson SP
-ON SOH.SalesPersonID = SP.BusinessEntityID
-INNER JOIN Sales.SalesTerritory AS ST
-ON SP.TerritoryID = ST.TerritoryID
-INNER JOIN [Person].[Person] AS PPP
-ON SP.BusinessEntityID = PPP.BusinessEntityID
-INNER JOIN [HumanResources].[Employee] AS HRE
-ON SP.BusinessEntityID = HRE.BusinessEntityID;
+    SELECT PP.Name as ProductName,
+    PC.Name AS CategoryName,
+    PS.Name AS SubCategoryName,
+    PPP.FirstName + ' ' + PPP.LastName AS SalesPersonName,       
+    SOH.TotalDue AS Revenue,
+    MONTH(SOH.OrderDate) AS MonthofTransaction, 
+    DATEPART(QUARTER, SOH.OrderDate) AS QuarterOfTransaction,
+    ST.Name AS Region
+    FROM [Production].[Product] AS PP
+    INNER JOIN  [Production].[ProductSubcategory] AS PS
+    ON PP.ProductSubcategoryID = PS.ProductSubcategoryID
+    INNER JOIN [Production].[ProductCategory] AS PC 
+    ON PS.ProductCategoryID = PC.ProductCategoryID
+    INNER JOIN Sales.SalesOrderDetail AS SOD
+    ON PP.ProductID = SOD.ProductID
+    INNER JOIN Sales.SalesOrderHeader AS SOH
+    ON SOD.SalesOrderID = SOH.SalesOrderID
+    INNER JOIN Sales.SalesPerson SP
+    ON SOH.SalesPersonID = SP.BusinessEntityID
+    INNER JOIN Sales.SalesTerritory AS ST
+    ON SP.TerritoryID = ST.TerritoryID
+    INNER JOIN [Person].[Person] AS PPP
+    ON SP.BusinessEntityID = PPP.BusinessEntityID
+    INNER JOIN [HumanResources].[Employee] AS HRE
+    ON SP.BusinessEntityID = HRE.BusinessEntityID;
 
 ## QUESTION 14
 
@@ -228,19 +228,19 @@ Display the information about the details of an order i.e. order number, order d
 
 ## SQL Query 14
 
-SELECT SO.SalesOrderID AS OrderNumber, SO.OrderDate, SO.TotalDue AS OrderAmount, SC.CustomerID,
-PP.FirstName + ' ' + PP.LastName AS SalesPersonName, (SO.TotalDue * SP.CommissionPct) AS Commission
-FROM 
-Sales.SalesOrderHeader AS SO
-LEFT JOIN Sales.Customer AS SC
-ON SO.CustomerID = SC.CustomerID
-LEFT JOIN [Sales].[SalesPerson] AS SP
-ON SP.BusinessEntityID = SO.SalesPersonID 
-LEFT JOIN [Person].[Person] AS PP
-ON SP.BusinessEntityID = PP.BusinessEntityID
-LEFT JOIN [HumanResources].[Employee] AS HRE
-ON PP.BusinessEntityID = HRE.BusinessEntityID
-
+    SELECT SO.SalesOrderID AS OrderNumber, SO.OrderDate, SO.TotalDue AS OrderAmount, SC.CustomerID,
+    PP.FirstName + ' ' + PP.LastName AS SalesPersonName, (SO.TotalDue * SP.CommissionPct) AS Commission
+    FROM 
+    Sales.SalesOrderHeader AS SO
+    LEFT JOIN Sales.Customer AS SC
+    ON SO.CustomerID = SC.CustomerID
+    LEFT JOIN [Sales].[SalesPerson] AS SP
+    ON SP.BusinessEntityID = SO.SalesPersonID 
+    LEFT JOIN [Person].[Person] AS PP
+    ON SP.BusinessEntityID = PP.BusinessEntityID
+    LEFT JOIN [HumanResources].[Employee] AS HRE
+    ON PP.BusinessEntityID = HRE.BusinessEntityID
+    
 
 ## QUESTION 15
 
@@ -256,22 +256,22 @@ For other colours, standard cost remains the same
 
 ## SQL Query 15
 
-SELECT 
-    ProductID,
-    Name,
-    Color,
-    StandardCost,
-    StandardCost * 0.1479 AS Commission,
-    CASE
-        WHEN Color = 'Black' THEN StandardCost * 1.22
-        WHEN Color = 'Red' THEN StandardCost * 0.88
-        WHEN Color = 'Silver' THEN StandardCost * 1.15
-        WHEN Color = 'Multi' THEN StandardCost * 1.05
-        WHEN Color = 'White' THEN (2 * StandardCost) / SQRT(StandardCost)
-        ELSE StandardCost
-    END AS Margin
-FROM 
-    Production.Product
+    SELECT 
+        ProductID,
+        Name,
+        Color,
+        StandardCost,
+        StandardCost * 0.1479 AS Commission,
+        CASE
+            WHEN Color = 'Black' THEN StandardCost * 1.22
+            WHEN Color = 'Red' THEN StandardCost * 0.88
+            WHEN Color = 'Silver' THEN StandardCost * 1.15
+            WHEN Color = 'Multi' THEN StandardCost * 1.05
+            WHEN Color = 'White' THEN (2 * StandardCost) / SQRT(StandardCost)
+            ELSE StandardCost
+        END AS Margin
+    FROM 
+        Production.Product
 
 ## QUESTION 16
 
@@ -279,21 +279,21 @@ Create a view to find out the top 5 most expensive products for each colour.
 
 ## SQL Query
 
-CREATE VIEW Top5ExpensiveProductsPerColor AS
-SELECT 
-    Color, 
-    Name, 
-    ListPrice
-FROM 
-(
+    CREATE VIEW Top5ExpensiveProductsPerColor AS
     SELECT 
-        PP.Color, 
-        PP.Name, 
-        PP.ListPrice, 
-        ROW_NUMBER() OVER(PARTITION BY PP.Color ORDER BY PP.ListPrice DESC) as RN
+        Color, 
+        Name, 
+        ListPrice
     FROM 
-        [Production].[Product] AS PP
-) T
-WHERE 
-    T.RN <= 5;
+    (
+        SELECT 
+            PP.Color, 
+            PP.Name, 
+            PP.ListPrice, 
+            ROW_NUMBER() OVER(PARTITION BY PP.Color ORDER BY PP.ListPrice DESC) as RN
+        FROM 
+            [Production].[Product] AS PP
+    ) T
+    WHERE 
+        T.RN <= 5;
 
