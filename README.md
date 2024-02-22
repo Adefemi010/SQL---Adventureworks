@@ -27,11 +27,11 @@ Find all the male employees born between 1962 to 1970 and with hire date greater
 
 ## SQL Query 2
 
-SELECT 
-* FROM [HumanResources].[Employee]
-WHERE (Gender = 'M' AND BirthDate BETWEEN '1962-01-01' AND '1970-12-31' AND HireDate > '2001-12-31')
-OR
-(Gender = 'F' AND BirthDate BETWEEN '1972-01-01' AND '1975-12-31' AND HireDate BETWEEN '2001-01-01' AND '2002-12-31')
+    SELECT 
+    * FROM [HumanResources].[Employee]
+    WHERE (Gender = 'M' AND BirthDate BETWEEN '1962-01-01' AND '1970-12-31' AND HireDate > '2001-12-31')
+    OR
+    (Gender = 'F' AND BirthDate BETWEEN '1972-01-01' AND '1975-12-31' AND HireDate BETWEEN '2001-01-01' AND '2002-12-31')
 
 
 ## Question 3
