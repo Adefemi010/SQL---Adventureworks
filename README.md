@@ -4,9 +4,9 @@
 
 Retrieve information about the products with colour values except null, red, silver/black, white and list price between £75 and £750. Rename the column StandardCost to Price. Also, sort the results in descending order by list price.
 
-## SQL Query
+## SQL Query 1
 
-SELECT 
+    SELECT 
     ProductID,
     Name,
     ProductNumber,
@@ -25,7 +25,7 @@ ORDER BY
 
 Find all the male employees born between 1962 to 1970 and with hire date greater than 2001 and female employees born between 1972 and 1975 and hire date between 2001 and 2002. 
 
-## SQL Query
+## SQL Query 2
 
 SELECT 
 * FROM [HumanResources].[Employee]
@@ -38,7 +38,7 @@ OR
 
 Create a list of 10 most expensive products that have a product number beginning with ‘BK’. Include only the productID, Name and colour. 
 
-## SQL Query
+## SQL Query 3
 
 SELECT TOP 10
 ProductID, Name, Color
@@ -51,7 +51,7 @@ ORDER BY ListPrice DESC
 
 Create a list of all contact persons, where the first 4 characters of the last name are the same as the first four characters of the email address. Also, for all contacts whose first name and the last name begin with the same characters, create a new column called full name combining first name and the last name only. Also provide the length of the new column full name.
 
-## SQL Query
+## SQL Query 4
 
 SELECT PP.BusinessEntityID, PP.FirstName, PP.LastName, PE.EmailAddress,
     CASE 
@@ -69,7 +69,7 @@ WHERE
 
 Return all product subcategories that take an average of 3 days or longer to manufacture.
 
-## SQL Query
+## SQL Query 5
 
 SELECT DISTINCT PS.Name, PP.DaysToManufacture, PS.ProductSubcategoryID
 FROM [Production].[Product] AS PP
@@ -82,7 +82,7 @@ WHERE PP.DaysToManufacture >= 3
 
 Create a list of product segmentation by defining criteria that places each item in a predefined segment as follows. If price gets less than £200 then low value. If price is between £201 and £750 then mid value. If between £750 and £1250 then mid to high value else higher value. Filter the results only for black, silver and red color products. 
 
-## SQL Query
+## SQL Query 6
 
 SELECT NAME, Color, ListPrice,
 CASE
@@ -99,7 +99,7 @@ WHERE Color IN ('black', 'silver', 'red')
 
 How many Distinct Job title is present in the Employee table? UESTION 7
 
-## SQL Query
+## SQL Query 7
 
 SELECT
 COUNT (DISTINCT JobTitle) AS NumberOfJobtitle
@@ -109,7 +109,7 @@ FROM [HumanResources].[Employee]
 
 Use employee table and calculate the ages of each employee at the time of hiring.
 
-## SQL Query
+## SQL Query 8
 
 SELECT BusinessEntityID, JobTitle, 
 DATEDIFF(YEAR, BirthDate, HireDate) 
@@ -120,7 +120,7 @@ FROM [HumanResources].[Employee]
 
 How many employees will be due a long service award in the next 5 years, if long service is 20 years? 
 
-## SQL Query
+## SQL Query 9
 
 SELECT 
 COUNT (*) AS LongServiceAwardsDue
@@ -132,7 +132,7 @@ DATEDIFF(YEAR, HireDate, DATEADD(YEAR, 5, GETDATE())) >= 20
 
 How many more years does each employee have to work before reaching sentiment, if sentiment age is 65? 
 
-## SQL Query
+## SQL Query 10
 
 SELECT 
 BusinessEntityID, JobTitle, 
@@ -146,7 +146,7 @@ If white increase price by 8%, If yellow reduce price by 7.5%, If black increase
 silver/black or blue take the square root of the price and double the value. Column should be called Newprice. For
 each item, also calculate commission as 37.5% of newly computed list price
 
-## SQL Query
+## SQL Query 11
 
 select ListPrice, color,
 CASE
@@ -171,7 +171,7 @@ from [Production].[Product]
 
 Print the information about all the Sales.Person and their sales quota. For every Sales person you should provide their FirstName, LastName, HireDate, SickLeaveHours and Region where they work. 
 
-## SQL Query
+## SQL Query 12
 
 SELECT SP.BusinessEntityID, PP.FirstName, PP.LastName, HRE.HireDate, HRE.SickLeaveHours, ST.Name AS Region
 FROM [Sales].[SalesPerson]  SP
@@ -194,7 +194,7 @@ Using adventure works, write a query to extract the following information.
 • Quarter of transaction
 • Region
 
-## SQL Query
+## SQL Query 13
 
 SELECT PP.Name as ProductName,
 PC.Name AS CategoryName,
@@ -226,7 +226,7 @@ ON SP.BusinessEntityID = HRE.BusinessEntityID;
 
 Display the information about the details of an order i.e. order number, order date, amount of order, which customer gives the order and which salesman works for that customer and how much commission he gets for an order. 
 
-## SQL Query
+## SQL Query 14
 
 SELECT SO.SalesOrderID AS OrderNumber, SO.OrderDate, SO.TotalDue AS OrderAmount, SC.CustomerID,
 PP.FirstName + ' ' + PP.LastName AS SalesPersonName, (SO.TotalDue * SP.CommissionPct) AS Commission
@@ -254,7 +254,7 @@ Multi: +5%
 White: Two times original cost divided by the square root of cost
 For other colours, standard cost remains the same 
 
-## SQL Query
+## SQL Query 15
 
 SELECT 
     ProductID,
