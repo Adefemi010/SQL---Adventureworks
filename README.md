@@ -40,11 +40,11 @@ Create a list of 10 most expensive products that have a product number beginning
 
 ## SQL Query 3
 
-SELECT TOP 10
-ProductID, Name, Color
-FROM [Production].[Product]
-WHERE ProductNumber LIKE 'BK%'
-ORDER BY ListPrice DESC
+    SELECT TOP 10
+    ProductID, Name, Color
+    FROM [Production].[Product]
+    WHERE ProductNumber LIKE 'BK%'
+    ORDER BY ListPrice DESC
 
 
 ## Question 4
@@ -53,16 +53,16 @@ Create a list of all contact persons, where the first 4 characters of the last n
 
 ## SQL Query 4
 
-SELECT PP.BusinessEntityID, PP.FirstName, PP.LastName, PE.EmailAddress,
+    SELECT PP.BusinessEntityID, PP.FirstName, PP.LastName, PE.EmailAddress,
     CASE 
         WHEN LEFT( PP.FirstName, 1) = LEFT(PP.LastName, 1) THEN CONCAT(PP.FirstName, ' ', PP.LastName) 
         ELSE NULL 
     END AS FullName,
     LEN(CONCAT(PP.FirstName, ' ', PP.LastName)) AS FullNameLength
-FROM [Person].[Person] AS PP
-JOIN [Person].[EmailAddress] AS PE
-ON  PP.BusinessEntityID = PE.BusinessEntityID
-WHERE 
+    FROM [Person].[Person] AS PP
+    JOIN [Person].[EmailAddress] AS PE
+    ON  PP.BusinessEntityID = PE.BusinessEntityID
+    WHERE 
     LEFT(PP.LastName, 4) = LEFT(PE.EmailAddress, 4)
 
 ## QUESTION 5 
